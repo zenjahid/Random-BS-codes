@@ -1,0 +1,67 @@
+
+include 'emu8086.inc'
+.model small
+.stack 100h
+.data
+arr db 100 dup(?)
+
+a dw ?
+
+.code
+main proc
+       
+        mov ax,@data
+        mov ds,ax
+        xor bx,bx
+        xor cx,cx
+       
+        print "Enter the length of the string: "
+       
+        mov ah,1
+        int 21h
+        and al,0fh
+       
+        mov cl,al
+        mov bl,al
+        mov si,0
+       
+       
+        printn
+        mov si, offset arr
+        print 'Enter string: '
+       
+       
+        l1:
+        mov ah,1
+        int 21h
+        add al,32
+        mov [si],al
+        inc si
+        loop l1
+       
+        mov si, offset arr
+        printn
+        print "Output : "
+       
+       
+               
+        mov cx,bx
+        mov si,0
+        mov ah,2
+         
+        output:
+            mov dl,arr[si]
+            int 21h
+            inc si
+           loop output    
+           
+           
+           
+       
+       
+        exit:
+        mov ah,4ch
+        int 21h
+
+main endp
+end main
