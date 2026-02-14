@@ -1,10 +1,17 @@
-name: Test Actions
+name: Basic Test
 
-on: [push, workflow_dispatch]
+on: [push]
 
 jobs:
-  hello:
+  simple-test:
     runs-on: ubuntu-latest
-    
     steps:
-      - run: echo "🎉 GitHub Actions is working!"
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo "Hello from GitHub Actions!"
+      - name: Run a multi-line script
+        run: |
+          echo "Testing GitHub Actions..."
+          echo "Current directory: $(pwd)"
+          echo "Files in repository:"
+          ls -la
